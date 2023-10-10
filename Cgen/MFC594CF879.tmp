@@ -1,0 +1,154 @@
+
+#include "Dio.h"
+#include "Std_Types.h"
+#include "Compiler.h"
+#include "tm4c123gh6pm_registers.h"
+#include "Dio_Regs.h"
+#include "Port_Regs.h"
+#include "Common_Macros.h"
+
+static uint8 getPortId(Dio_ChannelType ChannelId)
+{
+  return ChannelId / NUM_OF_PORT_SINGLE_PORT;
+}
+
+static uint8 getChannelId(Dio_ChannelType ChannelId)
+{
+  return ChannelId % NUM_OF_PORT_SINGLE_PORT;
+}
+
+
+static volatile uint32 * getPortBasePtr(Dio_ChannelType ChannelId)
+{
+  /* calculating the PortId from the Port-Pin index */
+  uint8 PortId = getPortId(ChannelId);
+  
+  /* according to PortId, the function will return the appropriate Base address */
+  switch(PortId)
+  {
+  case  0: return (volatile uint32 *)GPIO_PORTA_BASE_ADDRESS; /* PORTA Base Address */
+  case  1: return (volatile uint32 *)GPIO_PORTB_BASE_ADDRESS; /* PORTB Base Address */
+  case  2: return (volatile uint32 *)GPIO_PORTC_BASE_ADDRESS; /* PORTC Base Address */
+  case  3: return (volatile uint32 *)GPIO_PORTD_BASE_ADDRESS; /* PORTD Base Address */
+  case  4: return (volatile uint32 *)GPIO_PORTE_BASE_ADDRESS; /* PORTE Base Address */
+  case  5: return (volatile uint32 *)GPIO_PORTF_BASE_ADDRESS; /* PORTF Base Address */
+  }
+  
+  /* if there's no such Port-Pin index in the MCU */
+  return NULL_PTR;
+}
+Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
+
+{
+  static volatile  uint32 *Port_ptr = NULL_PTR;
+  Dio_LevelType output = STD_LOW;
+  uint8 Channel = getChannelId(ChannelId);
+  Port_ptr = getPortBasePtr(ChannelId);
+  output = GET_BIT((*(volatile uint32 *)((volatile uint8 *)Port_ptr + PORT_DATA_REG_OFFSET), Channel));
+  return output;
+  
+}
+
+void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
+{ 
+  static volatile  uint32 *Port_ptr = NULL_PTR;
+  Port_ptr = getPortBasePtr(ChannelId);
+  uint8 Channel = getChannelId(ChannelId);
+  
+  if (Level == STD_HIGH)
+  {
+    SET_BIT(*(volatile uint32 *)((volatile uint8 *)Port_ptr + PORT_DATA_REG_OFFSET), Channel);
+  }
+  else if (Level == STD_LOW)
+  {
+    CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)Port_ptr + PORT_DATA_REG_OFFSET), Channel);
+  }
+}
+
+
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
+{
+    volatile Dio_PortRegisterType Port_Register;
+
+    switch (PortId)
+    {
+        case 0:
+            Port_Register = GPIO_PORTA_DATA_REG;
+            break;
+
+        case 1:
+            Port_Register = GPIO_PORTB_DATA_REG;
+            break;
+
+        case 2:
+            Port_Register = GPIO_PORTC_DATA_REG;
+            break;
+
+        case 3:
+            Port_Register = GPIO_PORTD_DATA_REG;
+            break;
+
+        case 4:
+            Port_Register = GPIO_PORTE_DATA_REG;
+            break;
+
+        case 5:
+            Port_Register = GPIO_PORTF_DATA_REG;
+            break;
+
+        default:
+            // Handle invalid PortId here
+            // You can either set a default value or return an error code
+            // For now, let's assume an error code of 0xFF for invalid PortId
+            return 0xFF;
+    }
+
+    Dio_PortLevelType output = *(volatile uint32 *)((volatile uint8 *)Port_Register);
+    return output;
+}
+  
+  
+ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
+{
+    volatile Dio_PortRegisterType Port_Register;
+
+    switch (PortId)
+    {
+        case 0:
+            Port_Register = GPIO_PORTA_DATA_REG;
+            break;
+
+        case 1:
+            Port_Register = GPIO_PORTB_DATA_REG;
+            break;
+
+        case 2:
+            Port_Register = GPIO_PORTC_DATA_REG;
+            break;
+
+        case 3:
+            Port_Register = GPIO_PORTD_DATA_REG;
+            break;
+
+        case 4:
+            Port_Register = GPIO_PORTE_DATA_REG;
+            break;
+
+        case 5:
+            Port_Register = GPIO_PORTF_DATA_REG;
+            break;
+
+        default:
+            // Handle invalid PortId here
+            // You can either set a default value or return an error code
+            // For now, let's assume an error code of 0xFF for invalid PortId
+            return;
+    }
+
+    uint32(*Port_Registre) = Level;
+}
+  
+  
+  
+  
+  

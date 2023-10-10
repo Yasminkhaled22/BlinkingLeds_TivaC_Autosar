@@ -1,0 +1,28 @@
+
+#include "Systick_Driver.h"
+#include "PortF.h"
+
+#define Enable_Interrupts()    __asm("CPSIE I")
+#define Wait_For_Interrupt()     __asm("WFI") 
+
+extern void Application_SWC_1_Runnable_1(void);
+extern void Application_SWC_2_Runnable_1(void);
+
+int main()
+{
+  Pin_ConfigType LED1 = { PORT_PIN_OUT,STD_OFF,STD_LOW,PORT_PIN_LEVEL_LOW,PORT_DIO_MODE,STD_OFF, PORT_PIN_IN_NO_PULL};
+  Pin_ConfigType LED2 = { PORT_PIN_OUT,STD_OFF,STD_LOW,PORT_PIN_LEVEL_LOW,PORT_DIO_MODE,STD_OFF, PORT_PIN_IN_NO_PULL};
+  Pin_ConfigType LED3 = { PORT_PIN_OUT,STD_OFF,STD_LOW,PORT_PIN_LEVEL_LOW,PORT_DIO_MODE,STD_OFF, PORT_PIN_IN_NO_PULL};
+  Pin_ConfigType PB1 = { PORT_PIN_OUT,STD_OFF,STD_LOW,PORT_PIN_LEVEL_LOW,PORT_DIO_MODE,STD_OFF, PORT_PIN_IN_NO_PULL};
+  
+  Port_ConfigType;
+  Port_Init(&LED);
+  SysTick_Start();
+  Enable_Interrupts();
+  for(;;)
+  {
+    Application_SWC_1_Runnable_1();
+    Application_SWC_2_Runnable_1();
+  }
+  return 0;
+}

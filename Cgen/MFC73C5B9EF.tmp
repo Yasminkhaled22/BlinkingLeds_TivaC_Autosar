@@ -1,0 +1,50 @@
+#include "Rte_Application_SWC_2.h"
+
+#include "Systick_Driver.h"
+/*
+*Runnable:Application_SWC_2_Runnable_1
+*Event Type:periodic
+*DATA ACCESS:
+* DATA READ ACCESS:   State_1_Element_1    Rte_Read_R_SR_State_1_Element_1()
+*SYNCHRONOUS-SERVER-CALL-POINT:  Rte_Call_R_Set_Clear_CS_Set(Set_V CS_Set_Argument_1)
+*SYNCHRONOUS-SERVER-CALL-POINT:  Rte_Call_R_Set_Clear_CS_Clear(Clear_V CS_Clear_Argument_1)
+*/
+
+
+#define num_leds 3
+
+void Application_SWC_2_Runnable_1(void)
+{
+    Rte_IRead_Application_SWC_2_Runnable_1_R_SR_State_1_Element_1(PB_State);
+  //st = PB_State;
+  if(PB_State == OFF)
+  {
+      for (int i = 0; i < num_leds; i++) 
+      {
+          Rte_Call_R_Set_Clear_CS_Clear(i);
+      }          
+  }
+  else if( PB_State == CW)
+  {
+      for (int i = 0; i < num_leds; i++) 
+      {
+          Rte_Call_R_Set_Clear_CS_Set(i);
+          DelayMs();
+          Rte_Call_R_Set_Clear_CS_Clear(i);
+          DelayMs();
+      }       
+  }
+  else if (PB_State== CCW )
+  {
+      for (int i = num_leds-1 ; i >=0 ; i--) 
+      {
+          Rte_Call_R_Set_Clear_CS_Set(i);
+          DelayMs();
+          Rte_Call_R_Set_Clear_CS_Clear(i);
+          DelayMs();
+      } 
+  }
+
+}
+
+

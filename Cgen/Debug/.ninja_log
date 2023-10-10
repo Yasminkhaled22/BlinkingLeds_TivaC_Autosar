@@ -1,0 +1,12 @@
+# ninja log v5
+30	323	7141506904524241	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Rte.o	b4709099323fc669
+21	209	7141506904324228	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Dio_LCfg.o	e2c75272af37dc63
+414	757	7141506909460621	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Application_SWC_1.o	35210a3f4f77967c
+362	826	7141506910287354	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Dio.o	f7687d15036452df
+48	519	7141506906936711	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Port_LCfg.o	d5d7f1bfd82bb4de
+14	269	7141506904628647	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/main.o	40e501011a235109
+233	704	7141506907971452	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/CDD.o	bcf3adc2535a79d0
+19	267	7141229501939503	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/PortF.o	b30220e719abe5c9
+490	864	7141506910287354	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Systick_Driver.o	43d8d8cdf347a9fd
+3	445	7141506905037419	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/startup_ewarm.o	40543c6ac7f0e4c2
+11	233	7141508535568964	E:/ASU/Trainings/Autosar_Garraio/Tasks/Final_Project/Final_Project/Final_Project/Final_project_BSW/Cgen/Debug/Obj/Application_SWC_2.o	8b4daa31286e1838
